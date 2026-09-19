@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+  =========================================================
+  BASIC CALCULATOR - index.html
+  =========================================================
+  Structure only. Styling lives in style.css, logic in script.js.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============= THEME PANEL ============= -->
+  <!-- Fixed to the top-right corner of the screen. A sun/moon
+       switch: checked = dark (AMOLED) theme, unchecked = light. -->
+  <aside class="theme-panel">
+    <label class="theme-switch" for="themeToggle">
+      <span class="theme-icon" aria-hidden="true">☀️</span>
+
+      <input type="checkbox" id="themeToggle" aria-label="Switch between light and dark theme" />
+      <span class="slider"></span>
+
+      <span class="theme-icon" aria-hidden="true">🌙</span>
+    </label>
+
+    <p class="theme-label" id="themeLabel">Light</p>
+  </aside>
+
+  <!-- ============= CALCULATOR ============= -->
+  <main class="calculator entrance">
+
+    <!-- Display screen -->
+    <section class="display" aria-label="Calculator display">
+      <div class="display-expression" id="expression"></div>
+      <div class="display-current" id="current">0</div>
+    </section>
+
+    <!-- Button grid: 4 columns x 5 rows. Equals spans the last
+         two rows so it sits neatly beside 1-2-3 and 0-. below it. -->
+    <section class="buttons">
+
+      <!-- Row 1: function + operator buttons -->
+      <button class="btn btn-function" data-action="clear">AC</button>
+      <button class="btn btn-function" data-action="delete">DEL</button>
+      <button class="btn btn-operator" data-action="operator" data-operator="/">&divide;</button>
+      <button class="btn btn-operator" data-action="operator" data-operator="*">&times;</button>
+
+      <!-- Row 2 -->
+      <button class="btn btn-number" data-number="7">7</button>
+      <button class="btn btn-number" data-number="8">8</button>
+      <button class="btn btn-number" data-number="9">9</button>
+      <button class="btn btn-operator" data-action="operator" data-operator="-">&minus;</button>
+
+      <!-- Row 3 -->
+      <button class="btn btn-number" data-number="4">4</button>
+      <button class="btn btn-number" data-number="5">5</button>
+      <button class="btn btn-number" data-number="6">6</button>
+      <button class="btn btn-operator" data-action="operator" data-operator="+">+</button>
+
+      <!-- Row 4: 1, 2, 3, then equals starts here and spans down into row 5 -->
+      <button class="btn btn-number" data-number="1">1</button>
+      <button class="btn btn-number" data-number="2">2</button>
+      <button class="btn btn-number" data-number="3">3</button>
+      <button class="btn btn-equals" data-action="equals">=</button>
+
+      <!-- Row 5: 0 is wide (spans 2 columns), then decimal -->
+      <button class="btn btn-number btn-zero" data-number="0">0</button>
+      <button class="btn btn-number" data-action="decimal">.</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

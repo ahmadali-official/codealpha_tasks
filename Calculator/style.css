@@ -1,0 +1,457 @@
+/* =========================================================
+   BASIC CALCULATOR - style.css
+   =========================================================
+   Colors are stored as CSS variables on :root (the "light"
+   theme - this is the original color scheme). The
+   [data-theme="dark"] block below overrides those same
+   variables with a true AMOLED black palette. Every element
+   that uses a variable also has a transition, so switching
+   themes animates smoothly instead of jumping instantly.
+========================================================= */
+
+/* ---------- 1. Reset & base page styles ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* ---------- 2. Theme variables ---------- */
+
+/* LIGHT theme = the original color scheme (the default) */
+:root {
+  --page-bg: linear-gradient(135deg, #2b2f77, #1a1c2e);
+  --calc-bg: #1e2138;
+  --calc-shadow: rgba(0, 0, 0, 0.45);
+
+  --display-bg: #12132a;
+  --display-text: #ffffff;
+  --expression-text: #8a8fb3;
+  --error-text: #ff6b6b;
+
+  --btn-text: #ffffff;
+  --number-bg: #2c3050;
+  --number-hover: #383d69;
+
+  --operator-bg: #ff9f43;
+  --operator-hover: #ffb066;
+  --operator-text: #1e2138;
+
+  --function-bg: #4b4f76;
+  --function-hover: #5c6190;
+
+  --equals-bg: #4cd964;
+  --equals-hover: #63e07b;
+  --equals-text: #12132a;
+  --equals-glow: rgba(76, 217, 100, 0.7);
+
+  --calc-border: transparent;
+  --calc-neon: 0 0 0 rgba(0, 0, 0, 0); /* no neon glow in light theme */
+
+  --panel-bg: #1e2138;
+  --panel-text: #ffffff;
+  --panel-shadow: rgba(0, 0, 0, 0.45);
+}
+
+/* DARK theme = true AMOLED black (pure #000 everywhere it
+   makes sense, so black pixels stay fully off on OLED screens) */
+[data-theme="dark"] {
+  --page-bg: #000000;
+  --calc-bg: #000000;
+  --calc-shadow: rgba(0, 0, 0, 0.9);
+
+  --display-bg: #000000;
+  --display-text: #ffffff;
+  --expression-text: #6e6e6e;
+  --error-text: #ff5c5c;
+
+  --btn-text: #ffffff;
+  --number-bg: #0d0d0d;
+  --number-hover: #1c1c1c;
+
+  --operator-bg: #ff9f43;
+  --operator-hover: #ffb066;
+  --operator-text: #000000;
+
+  --function-bg: #1a1a1a;
+  --function-hover: #262626;
+
+  --equals-bg: #00e676;
+  --equals-hover: #33ff9c;
+  --equals-text: #000000;
+  --equals-glow: rgba(0, 230, 118, 0.8);
+
+  /* Neon blue edge glow, only active in dark mode */
+  --calc-border: rgba(0, 195, 255, 0.8);
+  --calc-neon: 0 0 18px 3px rgba(0, 195, 255, 0.55), 0 0 40px 8px rgba(0, 195, 255, 0.3);
+
+  --panel-bg: #000000;
+  --panel-text: #ffffff;
+  --panel-shadow: rgba(0, 0, 0, 0.9);
+}
+
+/* ---------- 3. Page layout ---------- */
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--page-bg);
+  font-family: "Segoe UI", Arial, sans-serif;
+  padding: 16px;
+  /* Smoothly fades the background when the theme switches */
+  transition: background 0.5s ease;
+}
+
+/* Calculator + theme panel sit side by side; wraps to a
+   column on narrow screens so nothing overlaps on mobile. */
+/* ---------- 4. Calculator box ---------- */
+.calculator {
+  width: 100%;
+  max-width: 360px;
+  background: var(--calc-bg);
+  border-radius: 22px;
+  padding: clamp(16px, 4.5vw, 22px);
+  border: 2px solid var(--calc-border);
+  /* Base drop shadow + the neon edge glow layered on top.
+     --calc-neon is invisible in light theme and a bright blue
+     glow in dark theme, so the edges only "light up" in the dark. */
+  box-shadow: 0 20px 45px var(--calc-shadow), var(--calc-neon);
+  transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+}
+
+/* Gentle breathing effect on the neon glow - dark theme only */
+[data-theme="dark"] .calculator {
+  animation: neonPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 0 20px 45px var(--calc-shadow),
+      0 0 14px 2px rgba(0, 195, 255, 0.45),
+      0 0 32px 6px rgba(0, 195, 255, 0.22);
+  }
+  50% {
+    box-shadow: 0 20px 45px var(--calc-shadow),
+      0 0 24px 5px rgba(0, 195, 255, 0.85),
+      0 0 55px 14px rgba(0, 195, 255, 0.4);
+  }
+}
+
+.entrance {
+  animation: popIn 0.45s ease-out;
+}
+
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.85) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ---------- 5. Display screen ---------- */
+.display {
+  background: var(--display-bg);
+  border-radius: 14px;
+  padding: clamp(14px, 4vw, 20px) clamp(12px, 3.5vw, 16px);
+  margin-bottom: clamp(14px, 3.5vw, 18px);
+  text-align: right;
+  min-height: clamp(75px, 16vw, 95px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  transition: background 0.5s ease;
+}
+
+.display-expression {
+  color: var(--expression-text);
+  font-size: clamp(0.85rem, 2.6vw, 1rem);
+  min-height: 20px;
+  word-wrap: break-word;
+  transition: color 0.5s ease;
+}
+
+.display-current {
+  color: var(--display-text);
+  font-size: clamp(1.6rem, 5.5vw, 2.1rem);
+  font-weight: 600;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
+  transition: color 0.5s ease;
+}
+
+.display-current.error {
+  color: var(--error-text);
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+}
+
+.shake {
+  animation: shakeDisplay 0.35s ease;
+}
+
+@keyframes shakeDisplay {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-5px); }
+  80%      { transform: translateX(5px); }
+}
+
+.pop {
+  animation: popResult 0.28s ease;
+}
+
+@keyframes popResult {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); color: var(--equals-bg); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- 6. Button grid layout ---------- */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 2.5vw, 12px);
+}
+
+/* ---------- 7. Base button look ---------- */
+.btn {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: clamp(13px, 4.5vw, 18px) 0;
+  font-size: clamp(1rem, 3.8vw, 1.25rem);
+  font-weight: 600;
+  color: var(--btn-text);
+  background: var(--number-bg);
+  transition: transform 0.08s ease, background 0.5s ease, color 0.5s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active {
+  transform: scale(0.92);
+}
+
+/* Number buttons (0-9) */
+.btn-number {
+  background: var(--number-bg);
+}
+
+.btn-number:hover {
+  background: var(--number-hover);
+}
+
+.btn-zero {
+  grid-column: span 2;
+}
+
+/* Operator buttons (+ - x /) */
+.btn-operator {
+  background: var(--operator-bg);
+  color: var(--operator-text);
+}
+
+.btn-operator:hover {
+  background: var(--operator-hover);
+}
+
+/* Function buttons: AC, DEL */
+.btn-function {
+  background: var(--function-bg);
+  font-size: clamp(0.85rem, 3.2vw, 1rem);
+}
+
+.btn-function:hover {
+  background: var(--function-hover);
+}
+
+/* Equals button - spans the last two rows so it sits tall
+   beside 1-2-3 (row 4) and 0-. (row 5) below it. */
+.btn-equals {
+  grid-row: span 2;
+  background: var(--equals-bg);
+  color: var(--equals-text);
+}
+
+.btn-equals:hover {
+  background: var(--equals-hover);
+}
+
+.btn-equals.pressed {
+  animation: equalsGlow 0.3s ease;
+}
+
+@keyframes equalsGlow {
+  0%   { box-shadow: 0 0 0 var(--equals-glow); }
+  50%  { box-shadow: 0 0 18px var(--equals-glow); }
+  100% { box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+}
+
+/* ---------- 8. Ripple effect ---------- */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(0);
+  animation: rippleEffect 0.5s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* ---------- 9. "Exit" fade animation ---------- */
+.exit {
+  animation: fadeOutCalculator 0.25s ease forwards;
+}
+
+@keyframes fadeOutCalculator {
+  to { opacity: 0; transform: scale(0.9); }
+}
+
+/* =========================================================
+   10. THEME PANEL (fixed sun/moon switch, top-right corner)
+   ========================================================= */
+.theme-panel {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+
+  background: var(--panel-bg);
+  border-radius: 16px;
+  padding: 10px 14px;
+  box-shadow: 0 10px 25px var(--panel-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+.theme-label {
+  color: var(--panel-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.85;
+  transition: color 0.5s ease;
+}
+
+/* The switch itself: a horizontal pill with a sliding circle,
+   plus a sun icon on the left and a moon icon on the right */
+.theme-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.theme-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* Hide the real checkbox - we build our own visual switch */
+.theme-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The pill-shaped track */
+.slider {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  background: var(--number-bg);
+  border-radius: 999px;
+  transition: background 0.4s ease;
+  flex-shrink: 0;
+}
+
+/* The circle that slides left/right inside the track */
+.slider::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.4s ease, background 0.4s ease;
+}
+
+/* When the checkbox is checked (dark theme on), slide the
+   circle to the right and tint the track with the accent color */
+.theme-switch input:checked + .slider {
+  background: var(--equals-bg);
+}
+
+.theme-switch input:checked + .slider::before {
+  transform: translateX(22px);
+}
+
+/* Little bounce on the icons whenever the theme changes,
+   triggered by script.js briefly adding this class */
+.icon-bounce {
+  animation: iconBounce 0.4s ease;
+}
+
+@keyframes iconBounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- 11. Device compatibility tweaks ---------- */
+
+@media (max-width: 340px) {
+  .calculator {
+    padding: 14px;
+    border-radius: 18px;
+  }
+  .buttons {
+    gap: 8px;
+  }
+}
+
+@media (min-width: 900px) {
+  .calculator {
+    max-width: 370px;
+  }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .display {
+    min-height: 70px;
+    margin-bottom: 10px;
+  }
+  .btn {
+    padding: 10px 0;
+  }
+}
+
+/* On very small screens, shrink the corner widget a touch so
+   it never overlaps the calculator */
+@media (max-width: 340px) {
+  .theme-panel {
+    top: 10px;
+    right: 10px;
+    padding: 8px 10px;
+  }
+}
