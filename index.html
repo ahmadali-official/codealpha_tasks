@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Gallery</title>
+
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="gallery-header">
+    <h1>My Image Gallery</h1>
+    <p>Click any image to view it in full screen (lightbox)</p>
+  </header>
+
+  <!-- ================= CATEGORY FILTER BUTTONS ================= -->
+  <!-- Each button has a data-category attribute used by JS to filter images -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-category="all">All</button>
+    <button class="filter-btn" data-category="nature">Nature</button>
+    <button class="filter-btn" data-category="city">City</button>
+    <button class="filter-btn" data-category="animals">Animals</button>
+    <button class="filter-btn" data-category="people">People</button>
+  </div>
+
+  <!-- ================= IMAGE GALLERY GRID ================= -->
+  <!-- Each figure has a data-category (for filtering) and a data-index (for lightbox navigation) -->
+  <main class="gallery-grid" id="galleryGrid">
+
+    <figure class="gallery-item" data-category="nature" data-index="0">
+      <img src="https://picsum.photos/id/1015/600/400" alt="Mountain river landscape" loading="lazy" />
+      <figcaption>Mountain River</figcaption>
+    </figure>
+
+    <figure class="gallery-item" data-category="city" data-index="1">
+      <img src="https://picsum.photos/id/1031/600/400" alt="City street at dusk" loading="lazy" />
+      <figcaption>City Street</figcaption>
+    </figure>
+
+    <figure class="gallery-item" data-category="animals" data-index="2">
+      <img src="https://picsum.photos/id/1025/600/400" alt="Dog sitting on grass" loading="lazy" />
+      <figcaption>Happy Dog</figcaption>
+    </figure>
+
+    <figure class="gallery-item" data-category="people" data-index="3">
+      <img src="https://picsum.photos/id/1005/600/400" alt="Person standing on a hill" loading="lazy" />
+      <figcaption>On the Hill</figcaption>
+    </figure>
+
+    <figure class="gallery-item" data-category="nature" data-index="4">
+      <img src="https://picsum.photos/id/1043/600/400" alt="Green valley" loading="lazy" />
+      <figcaption>Green Valley</figcaption>
+    </figure>
+
+    <figure class="gallery-item" data-category="city" data-index="5">
+      <img src="https://picsum.photos/id/1048/600/400" alt="Skyscrapers" loading="lazy" />
+      <figcaption>Skyscrapers</figcaption>
+    </figure>
+
+    <figure class="gallery-item" data-category="animals" data-index="6">
+      <img src="https://picsum.photos/id/1074/600/400" alt="Cat on windowsill" loading="lazy" />
+      <figcaption>Curious Cat</figcaption>
+    </figure>
+
+    <figure class="gallery-item" data-category="people" data-index="7">
+      <img src="https://picsum.photos/id/1011/600/400" alt="Group of friends walking" loading="lazy" />
+      <figcaption>Friends Walking</figcaption>
+    </figure>
+
+    <figure class="gallery-item" data-category="nature" data-index="8">
+      <img src="https://picsum.photos/id/1018/600/400" alt="Forest path" loading="lazy" />
+      <figcaption>Forest Path</figcaption>
+    </figure>
+
+  </main>
+
+  <!-- ================= LIGHTBOX OVERLAY ================= -->
+  <!-- Hidden by default (via CSS class), shown when an image is clicked -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+
+    <button class="lightbox-nav lightbox-prev" id="prevBtn">&#10094;</button>
+
+    <div class="lightbox-content">
+      <img src="" alt="" id="lightboxImg" />
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+
+    <button class="lightbox-nav lightbox-next" id="nextBtn">&#10095;</button>
+  </div>
+
+  <!-- Link to external JavaScript file (placed at end so DOM loads first) -->
+  <script src="script.js"></script>
+</body>
+</html>
