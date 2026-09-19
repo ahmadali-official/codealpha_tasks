@@ -7,10 +7,10 @@ Just open it and it works.
 
 ## 🔗 Live Site
 
-Once you deploy it (see below), put your link here:
+Link here:
 
 ```
-https://your-username.github.io/your-repo-name/
+https://github.com/ahmadali-official/codealpha_tasks.git
 ```
 
 ## 📸 What's Inside
@@ -74,14 +74,6 @@ You don't need to install anything. Just:
 2. Double-click `index.html`
 3. It opens straight in your browser
 
-## 🌐 How to Put It Live with GitHub Pages (Free)
-
-1. Create a new repository on GitHub and upload these files (`index.html`, `style.css`, `script.js`, and your PDFs)
-2. Go to your repo's **Settings** → **Pages**
-3. Under "Branch", choose `main` and save
-4. Wait a minute, then your site will be live at:
-   `https://your-username.github.io/your-repo-name/`
-
 ## 📬 Contact Form Note
 
 The contact form checks that your name, email, and message look correct, but it
@@ -96,4 +88,4 @@ If you do, a small credit back to this repo is appreciated but not required.
 
 ---
 
-Made with ☕ and a lot of curiosity by **Ahmad Ali**.
+Made with a lot of curiosity by **Ahmad Ali**.
