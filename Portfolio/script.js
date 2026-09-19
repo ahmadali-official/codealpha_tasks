@@ -1,8 +1,5 @@
 /* =========================================================
    PORTFOLIO SCRIPT.JS
-   This file is split into small, clearly-named functions.
-   Each function handles ONE feature. Scroll down to find the
-   one you want to change.
 ========================================================== */
 
 // Run everything only after the HTML has fully loaded
