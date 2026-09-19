@@ -1,12 +1,5 @@
 /* =========================================================
    BASIC CALCULATOR - style.css
-   =========================================================
-   Colors are stored as CSS variables on :root (the "light"
-   theme - this is the original color scheme). The
-   [data-theme="dark"] block below overrides those same
-   variables with a true AMOLED black palette. Every element
-   that uses a variable also has a transition, so switching
-   themes animates smoothly instead of jumping instantly.
 ========================================================= */
 
 /* ---------- 1. Reset & base page styles ---------- */
