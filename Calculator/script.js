@@ -3,6 +3,7 @@
    ========================================================= */
 
 /* ---------- 1. Grab all the elements we need once, up front ---------- */
+
 const calculatorEl    = document.querySelector(".calculator");
 const expressionEl    = document.getElementById("expression");
 const currentEl       = document.getElementById("current");
@@ -37,6 +38,7 @@ let shouldResetCurrent = false;
 // Turns a raw number string like "12345.6" into "12,345.6" for
 // display purposes ONLY. The raw, comma-free value in
 // currentInput/previousInput is what's actually used for math.
+
 function formatNumberString(numStr) {
   if (numStr === "" || numStr === undefined) return numStr;
 
