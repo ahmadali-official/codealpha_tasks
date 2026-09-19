@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<!--
-  =========================================================
+<!--=========================================================
   BASIC CALCULATOR - index.html
   =========================================================
-  Structure only. Styling lives in style.css, logic in script.js.
--->
+  Structure only. Styling lives in style.css, logic in script.js.-->
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -17,6 +16,7 @@
   <!-- ============= THEME PANEL ============= -->
   <!-- Fixed to the top-right corner of the screen. A sun/moon
        switch: checked = dark (AMOLED) theme, unchecked = light. -->
+  
   <aside class="theme-panel">
     <label class="theme-switch" for="themeToggle">
       <span class="theme-icon" aria-hidden="true">☀️</span>
@@ -31,6 +31,7 @@
   </aside>
 
   <!-- ============= CALCULATOR ============= -->
+  
   <main class="calculator entrance">
 
     <!-- Display screen -->
@@ -41,9 +42,11 @@
 
     <!-- Button grid: 4 columns x 5 rows. Equals spans the last
          two rows so it sits neatly beside 1-2-3 and 0-. below it. -->
+    
     <section class="buttons">
 
       <!-- Row 1: function + operator buttons -->
+      
       <button class="btn btn-function" data-action="clear">AC</button>
       <button class="btn btn-function" data-action="delete">DEL</button>
       <button class="btn btn-operator" data-action="operator" data-operator="/">&divide;</button>
