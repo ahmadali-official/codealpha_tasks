@@ -1,6 +1,7 @@
 // =====================================================================
 // SETUP: Grab references to all elements we need to interact with
 // =====================================================================
+
 const galleryItems = document.querySelectorAll(".gallery-item"); // all image cards
 const filterButtons = document.querySelectorAll(".filter-btn");  // category buttons
 
@@ -14,6 +15,7 @@ const nextBtn = document.getElementById("nextBtn");
 // Build an array of image data (src + caption + category) from the DOM.
 // This lets the lightbox know what to show next/previous without
 // re-reading the HTML every time.
+
 let imagesData = Array.from(galleryItems).map((item) => {
   const img = item.querySelector("img");
   const caption = item.querySelector("figcaption").textContent;
@@ -28,12 +30,14 @@ let imagesData = Array.from(galleryItems).map((item) => {
 // Tracks which image is currently open in the lightbox, and which
 // images are currently visible (so next/prev only cycles through
 // the FILTERED set, not hidden ones).
+
 let currentIndex = 0;
 let visibleIndexes = imagesData.map((_, i) => i); // starts as "all visible"
 
 // =====================================================================
 // FEATURE 1: CATEGORY FILTERING (Bonus feature)
 // =====================================================================
+
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const selectedCategory = button.dataset.category;
@@ -62,6 +66,7 @@ filterButtons.forEach((button) => {
 // =====================================================================
 // FEATURE 2: OPEN LIGHTBOX WHEN AN IMAGE IS CLICKED
 // =====================================================================
+
 galleryItems.forEach((item, index) => {
   item.addEventListener("click", () => {
     currentIndex = index;
@@ -100,6 +105,7 @@ lightbox.addEventListener("click", (e) => {
 // FEATURE 4: NEXT / PREVIOUS NAVIGATION
 // Cycles only through currently visible (filtered) images
 // =====================================================================
+
 function showNext() {
   const positionInVisible = visibleIndexes.indexOf(currentIndex);
   const nextPosition = (positionInVisible + 1) % visibleIndexes.length;
@@ -122,6 +128,7 @@ prevBtn.addEventListener("click", showPrev);
 // FEATURE 5: KEYBOARD SUPPORT (accessibility / convenience)
 // Arrow keys navigate, Escape closes the lightbox
 // =====================================================================
+
 document.addEventListener("keydown", (e) => {
   if (!lightbox.classList.contains("active")) return; // only when lightbox is open
 
