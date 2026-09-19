@@ -6,13 +6,13 @@ You can browse images in a grid, filter them by category, and click on any image
 
 ## Features
 
-- **Responsive grid layout** — automatically adjusts the number of columns based on screen size
-- **Lightbox view** — click any image to see it full-screen
-- **Next / Previous navigation** — move between images using on-screen buttons or your keyboard's arrow keys
-- **Category filters** — quickly filter images by Nature, City, Animals, or People
-- **Smooth hover effects and transitions** — cards lift, images zoom slightly, and captions fade in
-- **Keyboard shortcuts** — `←` / `→` to navigate, `Esc` to close the lightbox
-- **Mobile-friendly** — layout reflows nicely on smaller screens
+- Responsive grid layout** — automatically adjusts the number of columns based on screen size
+- Lightbox view** — click any image to see it full-screen
+- Next / Previous navigation** — move between images using on-screen buttons or your keyboard's arrow keys
+- Category filters** — quickly filter images by Nature, City, Animals, or People
+- Smooth hover effects and transitions** — cards lift, images zoom slightly, and captions fade in
+- Keyboard shortcuts** — `←` / `→` to navigate, `Esc` to close the lightbox
+- Mobile-friendly** — layout reflows nicely on smaller screens
 
 ## Project Structure
 
